@@ -1,5 +1,10 @@
 <?php
-include 'function/crudfunction.php'; ?>
+include 'function/crudfunction.php';
+session_start();
+if (!isset($_SESSION['username'])) {
+    header('location: login.php', true, 301);
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,14 +24,14 @@ include 'function/crudfunction.php'; ?>
 
 <body>
     <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top shadow" style="background-color: #72b8ff;">
-        <div class="container-fluid">
+        <div class="container">
             <a class="navbar-brand d-inline-block" href="#">
                 <i class="fa-solid fa-cubes" alt="Logo" width="30" height="24"
                     class="d-inline-block align-text-top"></i>
                 Project Monitoring
             </a>
         </div>
-
+        <a href="logout.php" type="logout" name="logout" class="btn float-right" style="padding-right: 40px;">Logout</a>
     </nav>
 
     <div class="container">
@@ -73,15 +78,36 @@ include 'function/crudfunction.php'; ?>
                                 <td><?= $data['start_date'] ?></td>
                                 <td><?= $data['end_date'] ?></td>
                                 <td>
-                                    <div class="progress">
-                                        <div class="progress-bar w-<?= $data[
-                                            'progress'
-                                        ] ?>" role="progressbar" aria-valuenow="<?= $data[
-    'progress'
-] ?>" aria-valuemin="0" aria-valuemax="100">
-                                        </div>
-                                    </div>
-                                    <p><?= $data['progress'] ?>%</p>
+                                    <?php if ($data['progress'] < 100) {
+                                        echo '
+                                        <div class="progress"' .
+                                            'style="height: 10px;">' .
+                                            '<div class="progress-bar" style="width: ' .
+                                            $data['progress'] .
+                                            '%; " role="progressbar" aria-valuenow="' .
+                                            $data['progress'] .
+                                            '" aria-valuemin="0" aria-valuemax="100">
+                </div>
+            </div>
+            <p> ' .
+                                            $data['progress'] .
+                                            '%</p>';
+                                    } else {
+                                        echo '
+                                        <div class="progress"' .
+                                            ' style="height: 10px;">' .
+                                            '<div class="progress-bar bg-success" style="width: ' .
+                                            $data['progress'] .
+                                            '%; " role="progressbar" aria-valuenow="' .
+                                            $data['progress'] .
+                                            '" aria-valuemin="0" aria-valuemax="100">
+                </div>
+            </div>
+            <p> ' .
+                                            $data['progress'] .
+                                            '%</p>';
+                                    } ?>
+
                                 </td>
                                 <td>
                                     <div method="post">

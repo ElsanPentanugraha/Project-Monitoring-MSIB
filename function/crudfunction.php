@@ -41,10 +41,11 @@ function addData()
     $client_name = $_POST['client_name'];
     $start_date = $_POST['start_date'];
     $end_date = $_POST['end_date'];
+    $progress = $_POST['progress'];
     $leader_id = $_POST['leader_id'];
 
-    $query = "INSERT INTO projects (project_name, client_name, start_date, end_date, leader_id) 
-         VALUES ('$project_name', '$client_name', '$start_date', '$end_date', '$leader_id')";
+    $query = "INSERT INTO projects (project_name, client_name, start_date, end_date, progress, leader_id) 
+         VALUES ('$project_name', '$client_name', '$start_date', '$end_date', '$progress', '$leader_id')";
     if (mysqli_query($connect, $query)) {
         echo "
                 <script>
@@ -70,6 +71,7 @@ function editData()
                                     client_name = '$_POST[client_name]', 
                                     start_date = '$_POST[start_date]', 
                                     end_date = '$_POST[end_date]',
+                                    progress = '$_POST[progress]',
                                     leader_id = '$_POST[leader_id]'
                                     WHERE id_project = '$getid'";
     if (mysqli_query($connect, $query)) {

@@ -1,5 +1,9 @@
 <?php
 include 'function/crudfunction.php';
+session_start();
+if (!isset($_SESSION['username'])) {
+    header('location: login.php', true, 301);
+}
 
 $leader = mysqli_query($connect, 'SELECT * FROM leaders');
 ?>
@@ -11,7 +15,7 @@ $leader = mysqli_query($connect, 'SELECT * FROM leaders');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>SIPM | Dashboard</title>
+    <title>SIPM | Project</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link
@@ -93,9 +97,19 @@ $leader = mysqli_query($connect, 'SELECT * FROM leaders');
                         <input class="form-control" type="date" name="end_date" value="<?= @$Tend_date ?>" id="end_date"
                             autocomplete="off">
                     </div>
-                    <div class="col-12 mb-3">
-                        <button type="submit" name="submit" class="btn btn-primary float-right">Save</button>
+                    <div class="col-md-6 mb-3">
+                        <label for="progress">Progress Project (%)</label>
+                        <input class="form-control" type="text" name="progress" value="<?= @$Tprogress ?>"
+                            id="client_name" autocomplete="off">
                     </div>
+                    <div class="col-12 mb-3 d-flex">
+                        <div class="col-6">
+                            <button type="submit" name="submit" class="btn btn-primary float-right">Save</button>
+                            <a href="index.php" type="back" name="back" class="btn btn-danger float-right">Back</a>
+                        </div>
+
+                    </div>
+
                 </form>
             </div>
         </div>
