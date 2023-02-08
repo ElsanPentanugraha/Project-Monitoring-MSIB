@@ -44,7 +44,7 @@ if (isset($_SESSION['username'])) {
                             </div>
                             <div class="form-group p-2">
                                 <label for="password">Password</label>
-                                <input type="text" class="form-control form-control-user mt-3" name="password"
+                                <input type="password" class="form-control form-control-user mt-3" name="password"
                                     aria-describedby="password" placeholder="Enter Password" autocomplete="off"
                                     required>
                             </div>

@@ -4,6 +4,12 @@ session_start();
 if (!isset($_SESSION['username'])) {
     header('location: login.php', true, 301);
 }
+
+function convertDate($date)
+{
+    // ubah string menjadi format tanggal
+    return date('d M Y', strtotime($date));
+}
 ?>
 
 <!DOCTYPE html>
@@ -66,17 +72,34 @@ if (!isset($_SESSION['username'])) {
                                 $connect,
                                 'SELECT * from projects JOIN leaders WHERE projects.leader_id = leaders.id'
                             );
-                            while (
-                                $data = mysqli_fetch_array($tampilProject)
-                            ): ?>
+
+                            while ($data = mysqli_fetch_array($tampilProject)):
+
+                                $start_date = $data['start_date'];
+                                $end_date = $data['end_date'];
+                                ?>
+
                             <tr>
                                 <td><?= $data['project_name'] ?></td>
                                 <td><?= $data['client_name'] ?></td>
-                                <td><?= $data['leader_name'] .
-                                    '</br>' .
-                                    $data['leader_email'] ?></td>
-                                <td><?= $data['start_date'] ?></td>
-                                <td><?= $data['end_date'] ?></td>
+                                <td>
+                                    <div class="leader-profile d-flex display-inline-block">
+                                        <div class="profile-image">
+                                            <img src=<?php echo '"assets/image/' .
+                                                $data['image_path'] .
+                                                '"'; ?> class="card-img-top rounded-circle" alt=""
+                                                style="width: 35px; height: 35px; margin-right: 5px; margin-top:6px;">
+                                        </div>
+                                        <div class="profile-data">
+                                            <?= $data['leader_name'] .
+                                                '</br>' .
+                                                $data['leader_email'] ?>
+                                        </div>
+                                    </div>
+
+                                </td>
+                                <td><?= convertDate($start_date) ?></td>
+                                <td><?= convertDate($end_date) ?></td>
                                 <td>
                                     <?php if ($data['progress'] < 100) {
                                         echo '
@@ -125,7 +148,8 @@ if (!isset($_SESSION['username'])) {
                                     </div>
                                 </td>
                             </tr>
-                            <?php endwhile;
+                            <?php
+                            endwhile;
                             ?>
                         </tbody>
                     </table>
