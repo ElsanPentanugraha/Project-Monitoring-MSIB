@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 26 Jan 2023 pada 16.35
+-- Waktu pembuatan: 08 Feb 2023 pada 10.26
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 8.1.2
 
@@ -24,22 +24,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `failed_jobs`
---
-
-CREATE TABLE `failed_jobs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Struktur dari tabel `leaders`
 --
 
@@ -47,6 +31,7 @@ CREATE TABLE `leaders` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `leader_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `leader_email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image_path` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -55,64 +40,11 @@ CREATE TABLE `leaders` (
 -- Dumping data untuk tabel `leaders`
 --
 
-INSERT INTO `leaders` (`id`, `leader_name`, `leader_email`, `created_at`, `updated_at`) VALUES
-(1, 'Indra Setiawan', 'indra.setiawan@gmail.com', NULL, NULL),
-(2, 'Hilman Syaputra', 'hilman.syah@gmail.com', NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `migrations`
---
-
-CREATE TABLE `migrations` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data untuk tabel `migrations`
---
-
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
-(2, '2014_10_12_100000_create_password_resets_table', 1),
-(3, '2019_08_19_000000_create_failed_jobs_table', 1),
-(4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(5, '2023_01_17_180005_create_leaders_table', 1),
-(6, '2023_01_17_180204_create_projects_table', 1);
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `password_resets`
---
-
-CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `personal_access_tokens`
---
-
-CREATE TABLE `personal_access_tokens` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `last_used_at` timestamp NULL DEFAULT NULL,
-  `expires_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `leaders` (`id`, `leader_name`, `leader_email`, `image_path`, `created_at`, `updated_at`) VALUES
+(1, 'Indra Setiawan', 'indra.setiawan@gmail.com', 'manuel-vega-torres-2MGgIIvgyqU-unsplash.jpg', NULL, NULL),
+(2, 'Hilman Syaputra', 'hilman.syah@gmail.com', 'mina-rad-K9T9hdf4PmI-unsplash.jpg', NULL, NULL),
+(3, 'Febri Gunawan', 'febri.gunawan@gmail.com', 'sandro-g-photography-H3z-RVMnlw8-unsplash.jpg', NULL, NULL),
+(4, 'Cantika Sanjaya', 'sjaya.cantika@gmail.com', 'sandro-g-photography-qPpyCgQl7yU-unsplash.jpg', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -137,9 +69,10 @@ CREATE TABLE `projects` (
 --
 
 INSERT INTO `projects` (`id_project`, `project_name`, `client_name`, `start_date`, `end_date`, `progress`, `leader_id`, `created_at`, `updated_at`) VALUES
-(1, 'Pembuatan SI Keuangan', 'Bakeuda Prov. Kalsel', '2022-01-14', '2022-08-14', 30, 1, NULL, NULL),
-(3, 'test name project', 'KPID', '2023-01-11', '2023-01-04', 75, 2, NULL, NULL),
-(5, 'Aplikasi Test name project', 'Bank Indonesia', '2023-01-20', '2023-01-20', 100, 1, NULL, NULL);
+(1, 'Pembuatan SI Keuangan', 'Bakeuda Prov. Kalsel', '2022-01-14', '2022-08-14', 40, 1, NULL, NULL),
+(3, 'Portal Berita', 'KPID', '2023-01-11', '2023-01-04', 75, 2, NULL, NULL),
+(5, 'QRIS', 'Bank Indonesia', '2023-01-20', '2023-01-20', 100, 3, NULL, NULL),
+(6, 'Employee Monitoring', 'PT. Query Indonesia', '2023-02-06', '2023-05-05', 10, 4, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -170,37 +103,10 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 --
 
 --
--- Indeks untuk tabel `failed_jobs`
---
-ALTER TABLE `failed_jobs`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
-
---
 -- Indeks untuk tabel `leaders`
 --
 ALTER TABLE `leaders`
   ADD PRIMARY KEY (`id`);
-
---
--- Indeks untuk tabel `migrations`
---
-ALTER TABLE `migrations`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indeks untuk tabel `password_resets`
---
-ALTER TABLE `password_resets`
-  ADD PRIMARY KEY (`email`);
-
---
--- Indeks untuk tabel `personal_access_tokens`
---
-ALTER TABLE `personal_access_tokens`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
-  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
 -- Indeks untuk tabel `projects`
@@ -221,34 +127,16 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT untuk tabel `failed_jobs`
---
-ALTER TABLE `failed_jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT untuk tabel `leaders`
 --
 ALTER TABLE `leaders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT untuk tabel `migrations`
---
-ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT untuk tabel `personal_access_tokens`
---
-ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id_project` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_project` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
